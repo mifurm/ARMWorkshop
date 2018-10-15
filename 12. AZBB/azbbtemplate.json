@@ -1,0 +1,22 @@
+{
+    "$schema": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/schemas/buildingBlocks.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "buildingBlocks": {
+        "value": [
+          {
+            "type": "VirtualMachine",
+            "settings": 
+            {
+                "vmCount": 1,
+                "osType": "windows",
+                "namePrefix": "test",
+                "adminPassword": "testPassw0rd!23",
+                "nics": [{"subnetName": "web"}],
+                "virtualNetwork": {"name": "ra-vnet"}
+            }
+        }
+    ]
+    }
+  }
+}

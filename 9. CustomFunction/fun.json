@@ -1,0 +1,27 @@
+"functions": [
+    {
+        "namespace": "nicNameCount",
+        "members": {
+            "getNicName": {
+                "parameters": [
+                    {
+                        "name": "prefix",
+                        "type": "string"
+                    },
+                    {
+                        "name": "vmType",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "type": "string"
+                    }
+                ],
+                "output": {
+                    "type": "string",
+                    "value": "[concat(toLower(parameters('prefix')),'-',parameters('vmType'),'-nic-',padLeft(parameters('id'),2,'0'))]"
+                }
+            }
+        }
+    }
+],
