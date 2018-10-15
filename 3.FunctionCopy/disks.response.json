@@ -1,0 +1,117 @@
+{
+    "id": "/subscriptions/c0eace6b-deca-4861-8042-b4e807cef056/resourceGroups/armworkshop01/providers/Microsoft.Resources/deployments/copyfundisks",
+    "name": "copyfundisks",
+    "properties": {
+      "additionalProperties": {
+        "duration": "PT4.9607764S",
+        "outputResources": [],
+        "templateHash": "3444878832801545260"
+      },
+      "correlationId": "816306e2-1ee0-47f7-b077-da3e8d12b24b",
+      "debugSetting": null,
+      "dependencies": [],
+      "mode": "Incremental",
+      "outputs": {
+        "exampleArray": {
+          "type": "Array",
+          "value": [
+            {
+              "diskIndex": 0,
+              "diskSizeGB": "1",
+              "name": "myDataDisk1"
+            },
+            {
+              "diskIndex": 1,
+              "diskSizeGB": "1",
+              "name": "myDataDisk2"
+            },
+            {
+              "diskIndex": 2,
+              "diskSizeGB": "1",
+              "name": "myDataDisk3"
+            },
+            {
+              "diskIndex": 3,
+              "diskSizeGB": "1",
+              "name": "myDataDisk4"
+            },
+            {
+              "diskIndex": 4,
+              "diskSizeGB": "1",
+              "name": "myDataDisk5"
+            }
+          ]
+        },
+        "exampleArrayOnObject": {
+          "type": "Array",
+          "value": [
+            {
+              "diskIndex": 0,
+              "diskSizeGB": "1",
+              "name": "myDataDisk1"
+            },
+            {
+              "diskIndex": 1,
+              "diskSizeGB": "1",
+              "name": "myDataDisk2"
+            },
+            {
+              "diskIndex": 2,
+              "diskSizeGB": "1",
+              "name": "myDataDisk3"
+            },
+            {
+              "diskIndex": 3,
+              "diskSizeGB": "1",
+              "name": "myDataDisk4"
+            },
+            {
+              "diskIndex": 4,
+              "diskSizeGB": "1",
+              "name": "myDataDisk5"
+            }
+          ]
+        },
+        "exampleObject": {
+          "type": "Object",
+          "value": {
+            "disks": [
+              {
+                "diskIndex": 0,
+                "diskSizeGB": "1",
+                "name": "myDataDisk1"
+              },
+              {
+                "diskIndex": 1,
+                "diskSizeGB": "1",
+                "name": "myDataDisk2"
+              },
+              {
+                "diskIndex": 2,
+                "diskSizeGB": "1",
+                "name": "myDataDisk3"
+              },
+              {
+                "diskIndex": 3,
+                "diskSizeGB": "1",
+                "name": "myDataDisk4"
+              },
+              {
+                "diskIndex": 4,
+                "diskSizeGB": "1",
+                "name": "myDataDisk5"
+              }
+            ]
+          }
+        }
+      },
+      "parameters": {},
+      "parametersLink": null,
+      "providers": [],
+      "provisioningState": "Succeeded",
+      "template": null,
+      "templateLink": null,
+      "timestamp": "2018-10-15T05:39:52.445380+00:00"
+    },
+    "resourceGroup": "armworkshop01"
+  }
