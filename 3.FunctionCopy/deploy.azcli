@@ -1,0 +1,8 @@
+resrouceGroupName=armworkshop01
+deploymentName=copyfun
+file=copy.json
+
+az group deployment create -g $resrouceGroupName \
+    -n $deploymentName \
+    --template-file $file
+
