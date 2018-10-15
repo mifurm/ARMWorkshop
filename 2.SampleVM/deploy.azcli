@@ -1,0 +1,7 @@
+resrouceGroupName=armworkshop01
+deploymentName=vmdepl
+
+az group deployment create -g $resrouceGroupName \
+    -n $deploymentName \
+    --template-file azuredep.json \
+    --parameters @azuredep.params.json
