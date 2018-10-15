@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "variables":
+    {  
+        "subscription":"c0eace6b-deca-4861-8042-b4e807cef056",
+        "rg":"rg-keyvault",
+        "secretName":"mypassword",
+        "keyVaultName":"szklchm-keyvault01"
+    },
+    "parameters": {
+        "adminLogin": {
+            "value": "mifurmadm"
+        },
+        "adminPassword": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/c0eace6b-deca-4861-8042-b4e807cef056/resourceGroups/rg-keyvault/providers/Microsoft.KeyVault/vaults/szklchm-keyvault01"
+              },
+              "secretName": "mypassword"
+            }
+        },
+        "sqlServerName": {
+            "value": "mfsqlsrv01"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+az group deployment create -n mf01rgdep -g mf01rg --template-file azuredeploy.json --parameters @azure.params.json

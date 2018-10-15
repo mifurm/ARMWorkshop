@@ -1,0 +1,9 @@
+
+keyvaultname=szklchm-keyvault01
+rgname=rg-keyvault
+az keyvault update -n $keyvaultname -g $rgname --set properties.enabledForDeployment=true
+az keyvault update -n $keyvaultname -g $rgname --set properties.enabledForTemplateDeployment=true
+
+keyvaultname=szklchm-keyvault01
+rgname=rg-keyvault
+az group deployment create -g $rgname -n mykeyvaultdeployment --template-file sqlserver.json --parameters @sqlserver-params.json
