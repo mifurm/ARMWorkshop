@@ -1,0 +1,50 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageType": {
+            "type": "string",
+            "allowedValues": [
+              "Standard_LRS",
+              "Standard_GRS"
+            ],
+            "defaultValue": "Standard_LRS",
+            "metadata": {
+              "description": "The type of replication to use for the storage account."
+            }
+        }
+    },
+    "variables": { 
+        "storageName":"fpsa01"
+     },
+    "functions": [  ],
+    "resources": [
+        {
+           "apiVersion": "2017-05-10",
+           "name": "linkedTemplate",
+           "type": "Microsoft.Resources/deployments",
+           "properties": {
+             "mode": "Incremental",
+             "templateLink": {
+                "uri":"https://mifurmsa.blob.core.windows.net/tempsecure/storageAccount.json?sp=r&st=2018-10-12T14:36:28Z&se=2018-10-14T22:36:28Z&spr=https&sv=2017-11-09&sig=Rb4y1%2B%2Be1w54%2Benq6A91EzE9OEOBRiUHEFl8k57Y%2Fs8%3D&sr=b",
+                "contentVersion":"1.0.0.0"
+             },
+             "parameters": {
+                "indexValue":{"value": "4"}
+              }
+           }
+        }
+      ],
+    "outputs": {
+      "messageFromLinkedTemplate": {
+        "type": "string",
+        "value": "[reference('linkedTemplate').outputs.greetingMessage.value]"
+      },
+      "otherGreatOutputMessage":{
+        "type":"string",
+        "value": "[reference('linkedTemplate').outputs.bloblink.value]"
+      }
+    }
+}
+
+
