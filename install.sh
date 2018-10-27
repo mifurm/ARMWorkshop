@@ -1,3 +1,3 @@
 #!/bin/sh
-sudo apt-get update
-sudo apt-get install apache2 lynx
+sudo apt-get update --assume-yes
+sudo apt-get install apache2 lynx --assume-yes
