@@ -4,4 +4,3 @@ sudo apt-get install apache2 lynx --assume-yes
 sudo apt-get install python3.6 --assume-yes
 sudo apt install python3-pip --assume-yes
 sudo add-apt-repository ppa:eugenesan/ppa --assume-yes
-sudo apt-get install mc --assume-yes
