@@ -1,4 +1,5 @@
 
+$MikrotikVHD = "C:\Users\Administrator\Downloads\chr-6.42.12.vhd"
 $ResourceGroup = "mikrotikrg"
 $Location = "westeurope"
 $VNETName = "vnet01-mng"
