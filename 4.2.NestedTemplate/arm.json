@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "admin-username": { "type": "string" },
+        "admin-password": { "type": "securestring" },
+        "vm-name": { "type": "string" },
+        "vm-nic": { "type": "string" },
+        "ubuntu-os-version": {
+            "type": "string",
+            "defaultValue": "18.04-LTS",
+            "allowedValues": [
+              "16.04.0-LTS",
+              "18.04-LTS"
+            ]
+        }
+    },
+    "variables": {
+        "imagePublisher": "Canonical",
+        "imageOffer": "UbuntuServer",
+        "vm-size": "Standard_A1",
+        "vm-os-disk-name": "[concat(parameters('vm-name'),'-','osdisk')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2016-04-30-preview",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('vm-name')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+              "hardwareProfile": { "vmSize": "[variables('vm-size')]" },
+              "osProfile": {
+                "computerName": "[parameters('vm-name')]",
+                "adminUsername": "[parameters('admin-username')]",
+                "adminPassword": "[parameters('admin-password')]"
+              },
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "[variables('imagePublisher')]",
+                  "offer": "[variables('imageOffer')]",
+                  "sku": "[parameters('ubuntu-os-version')]",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "name": "[variables('vm-os-disk-name')]",
+                  "caching": "ReadWrite",
+                  "createOption": "FromImage"
+                }
+              },
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "[parameters('vm-nic')]"
+                  }
+                ]
+              }
+            }
+          }
+    ],
+    "outputs": {}
+}
