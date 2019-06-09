@@ -18,7 +18,7 @@
     "variables": {
         "imagePublisher": "Canonical",
         "imageOffer": "UbuntuServer",
-        "vm-size": "Standard_B1",
+        "vm-size": "Standard_D1_v2",
         "vm-os-disk-name": "[concat(parameters('vm-name'),'-','osdisk')]"
     },
     "resources": [
