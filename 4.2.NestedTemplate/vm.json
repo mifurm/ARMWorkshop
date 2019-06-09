@@ -18,7 +18,7 @@
     "variables": {
         "imagePublisher": "Canonical",
         "imageOffer": "UbuntuServer",
-        "vm-size": "Standard_A1",
+        "vm-size": "Standard_B1",
         "vm-os-disk-name": "[concat(parameters('vm-name'),'-','osdisk')]"
     },
     "resources": [
@@ -28,7 +28,9 @@
             "name": "[parameters('vm-name')]",
             "location": "[resourceGroup().location]",
             "properties": {
-              "hardwareProfile": { "vmSize": "[variables('vm-size')]" },
+              "hardwareProfile": { 
+                  "vmSize": "[variables('vm-size')]" 
+                },
               "osProfile": {
                 "computerName": "[parameters('vm-name')]",
                 "adminUsername": "[parameters('admin-username')]",
