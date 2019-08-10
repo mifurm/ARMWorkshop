@@ -1,0 +1,10 @@
+
+az account set --subscription "Visual Studio Enterprise – MPN"
+
+groupName=armworkshop
+az group create --name armworkshop --location northeurope
+
+#copy storage accounts
+az group deployment create --name armworkshop02dep \
+    -g $groupName \
+    --template-file '/Users/mifurm/Documents/Projekty/6.Klienci/Intercars/WorkshopARM/1.Functions/arm02.json'
