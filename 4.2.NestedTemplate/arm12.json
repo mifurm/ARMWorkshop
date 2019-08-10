@@ -1,0 +1,185 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "admin-username": { "type": "string" },
+        "admin-password": { "type": "securestring" }
+    },
+    "variables": {
+      "vnetName":"vnet-def",
+      "subnetName1":"subnet1",
+      "subnetName2":"subnet2",
+      "nsg-name": "nsg-default",
+      "vmname-1": "vm-1-ubuntu",
+      "vmname-2": "vm-2-ubuntu",
+      "vmPIP1":"pipvm1",
+      "vmPIP2":"pipvm2",
+      "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('vnetName'))]", 
+      "subnetRef-1": "[concat(variables('vnetID'),'/subnets/',variables('subnetName1'))]",
+      "subnetRef-2": "[concat(variables('vnetID'),'/subnets/',variables('subnetName2'))]",
+      "nicname-1": "[concat(variables('vmname-1'), 'nic-default')]",
+      "nicname-2": "[concat(variables('vmname-2'), 'nic-default')]"
+    },
+    "resources": [
+        {
+            "name": "nsg-deploy",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "https://raw.githubusercontent.com/mifurm/ARMWorkshop/master/4.2.NestedTemplate/nsg.json"
+                },
+                "parameters": {
+                    "nsg-name": {"value": "[variables('nsg-name')]"}
+                }
+            }
+        },
+      {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[variables('vmPIP1')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "publicIPAllocationMethod": "Dynamic"
+          
+        }
+      },
+      {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[variables('vmPIP2')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "publicIPAllocationMethod": "Dynamic"
+        }
+      },
+      {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[variables('vnetName')]",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+            "[concat('Microsoft.Resources/deployments/','nsg-deploy')]"
+        ],
+        "properties": {
+          "addressSpace": { "addressPrefixes": [ "10.0.0.0/16" ] },
+          "subnets": [
+            {
+              "name": "[variables('subnetName1')]",
+              "properties": { 
+                  "addressPrefix": "10.0.0.0/24",
+                  "networkSecurityGroup": {
+                      "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsg-name'))]"
+                  }
+               }
+            },
+            {
+                "name": "[variables('subnetName2')]",
+                "properties": {
+                    "addressPrefix": "10.0.1.0/24",
+                    "networkSecurityGroup": {
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsg-name'))]"
+                    }
+                }
+            }
+          ]
+        }
+      },
+      {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[variables('nicname-1')]",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/publicIPAddresses/', variables('vmPIP1'))]",
+          "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]"
+        ],
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": { "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('vmPIP1'))]" },
+                "subnet": { "id": "[variables('subnetRef-1')]" }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[variables('nicname-2')]",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/publicIPAddresses/', variables('vmPIP2'))]",
+          "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]"
+        ],
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "ipconfig2",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": { "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('vmPIP2'))]" },
+                "subnet": { "id": "[variables('subnetRef-2')]" }
+              }
+            }
+          ]
+        }
+      },
+      {
+          "name": "vm-deploy",
+          "type": "Microsoft.Resources/deployments",
+          "apiVersion": "2015-01-01",
+          "dependsOn": [
+              "[resourceId('Microsoft.Network/networkInterfaces',variables('nicname-1'))]"
+          ],
+          "properties": {
+              "mode": "Incremental",
+              "templateLink": {
+                  "contentVersion": "1.0.0.0",
+                  "uri": "https://raw.githubusercontent.com/mifurm/ARMWorkshop/master/4.2.NestedTemplate/vm.json"
+              },
+              "parameters": {
+                  "vm-name": { 
+                      "value": "[variables('vmname-1')]" 
+                    },
+                  "admin-username": { 
+                      "value": "[parameters('admin-username')]" 
+                    },
+                  "admin-password": { 
+                      "value": "[parameters('admin-password')]" 
+                    },
+                  "vm-nic": { 
+                      "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicname-1'))]" 
+                    }
+              }
+          }
+      },
+      {
+        "name": "vm-deploy-2",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2015-01-01",
+        "dependsOn": [
+            "[resourceId('Microsoft.Network/networkInterfaces',variables('nicname-2'))]"
+        ],
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "contentVersion": "1.0.0.0",
+                "uri": "https://raw.githubusercontent.com/BlackDante/arm-workshop/master/3.2/shared/vm.json"
+            },
+            "parameters": {
+                "vm-name": { "value": "[variables('vmname-2')]" },
+                "admin-username": { "value": "[parameters('admin-username')]" },
+                "admin-password": { "value": "[parameters('admin-password')]" },
+                "vm-nic": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicname-2'))]" }
+            }
+        }
+    }
+    ]
+  }
