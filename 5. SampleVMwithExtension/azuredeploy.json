@@ -44,7 +44,7 @@
     "variables": {
       "imagePublisher": "Canonical",
       "imageOffer": "UbuntuServer",
-      "ubuntuOSVersion": "17.10",
+      "ubuntuOSVersion": "18.04 ",
       "virtualMachineName": "VM-MultiNic",
       "nic1": "nic-1",
       "nic2": "nic-2",

@@ -6,7 +6,7 @@
         "value": "mifurmadm"
       },
       "adminPassword": {
-        "value": "test123!@#"
+        "value": "<password>"
       },
       "dnsLabelPrefix": {
         "value": "mifurmdns01"

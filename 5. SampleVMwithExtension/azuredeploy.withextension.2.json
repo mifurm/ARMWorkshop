@@ -12,7 +12,7 @@
       },
       "adminUsername": {
         "type": "string",
-        "defaultValue": "admin",
+        "defaultValue": "mifurm",
         "metadata": {
           "description": "Default Admin username"
         }
@@ -45,7 +45,7 @@
     "variables": {
       "imagePublisher": "Canonical",
       "imageOffer": "UbuntuServer",
-      "ubuntuOSVersion": "17.10",
+      "ubuntuOSVersion": "18.04-lTS",
       "virtualMachineName": "VM-MultiNic",
       "nic1": "nic-1",
       "nic2": "nic-2",
@@ -74,10 +74,7 @@
           "osProfile": {
             "computerName": "[variables('virtualMachineName')]",
             "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[parameters('adminPassword')]",
-            "windowsConfiguration": {
-              "provisionVmAgent": "true"
-            }
+            "adminPassword": "[parameters('adminPassword')]"
           },
           "hardwareProfile": {
             "vmSize": "[parameters('virtualMachineSize')]"

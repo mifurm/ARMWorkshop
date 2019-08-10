@@ -6,7 +6,7 @@
         "value": "azureuser"
       },
       "password": {
-        "value": "Testtest123!@#"
+        "value": "<password>"
       },
       "vmSize": {
         "value": "Standard_A1"

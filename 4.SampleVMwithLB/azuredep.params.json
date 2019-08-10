@@ -9,7 +9,7 @@
         "value": "admin123"
       },
       "adminPassword": {
-        "value": "test123!@#"
+        "value": "<password>"
       },
       "dnsNameforLBIP": {
         "value": "mfsa12345"
