@@ -2,8 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "admin-username": { "type": "string" },
-        "admin-password": { "type": "securestring" }
+        "admin-username": { 
+            "type": "string" 
+        },
+        "admin-password": { 
+            "type": "securestring" 
+        }
     },
     "variables": {
       "vnetName":"vnet-def",
@@ -32,7 +36,9 @@
                     "uri": "https://raw.githubusercontent.com/mifurm/ARMWorkshop/master/4.2.NestedTemplate/nsg.json"
                 },
                 "parameters": {
-                    "nsg-name": {"value": "[variables('nsg-name')]"}
+                    "nsg-name": {
+                        "value": "[variables('nsg-name')]"
+                    }
                 }
             }
         },
@@ -43,7 +49,6 @@
         "location": "[resourceGroup().location]",
         "properties": {
           "publicIPAllocationMethod": "Dynamic"
-          
         }
       },
       {
@@ -102,8 +107,12 @@
               "name": "ipconfig1",
               "properties": {
                 "privateIPAllocationMethod": "Dynamic",
-                "publicIPAddress": { "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('vmPIP1'))]" },
-                "subnet": { "id": "[variables('subnetRef-1')]" }
+                "publicIPAddress": { 
+                    "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('vmPIP1'))]" 
+                },
+                "subnet": { 
+                    "id": "[variables('subnetRef-1')]" 
+                }
               }
             }
           ]
@@ -124,8 +133,12 @@
               "name": "ipconfig2",
               "properties": {
                 "privateIPAllocationMethod": "Dynamic",
-                "publicIPAddress": { "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('vmPIP2'))]" },
-                "subnet": { "id": "[variables('subnetRef-2')]" }
+                "publicIPAddress": { 
+                    "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('vmPIP2'))]" 
+                },
+                "subnet": { 
+                    "id": "[variables('subnetRef-2')]" 
+                }
               }
             }
           ]
@@ -174,10 +187,18 @@
                 "uri": "https://raw.githubusercontent.com/BlackDante/arm-workshop/master/3.2/shared/vm.json"
             },
             "parameters": {
-                "vm-name": { "value": "[variables('vmname-2')]" },
-                "admin-username": { "value": "[parameters('admin-username')]" },
-                "admin-password": { "value": "[parameters('admin-password')]" },
-                "vm-nic": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicname-2'))]" }
+                "vm-name": { 
+                    "value": "[variables('vmname-2')]" 
+                },
+                "admin-username": { 
+                    "value": "[parameters('admin-username')]" 
+                },
+                "admin-password": { 
+                    "value": "[parameters('admin-password')]" 
+                },
+                "vm-nic": { 
+                    "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicname-2'))]" 
+                }
             }
         }
     }
