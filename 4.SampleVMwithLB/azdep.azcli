@@ -1,4 +1,4 @@
-az group deployment create -g armworkshop01 \
+az group deployment create -g mfrg01 \
     -n vmdepl1702 \
     --template-file azuredep.json \
     --parameters @azuredep.params.json

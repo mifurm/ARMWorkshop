@@ -1,4 +1,4 @@
-resrouceGroupName=armworkshop01
+resrouceGroupName=mfrg01
 deploymentName=vmdepl
 
 az group deployment create -g $resrouceGroupName \
@@ -6,10 +6,15 @@ az group deployment create -g $resrouceGroupName \
     --template-file azuredep.json \
     --parameters @azuredep.params.json
 
-resrouceGroupName=armworkshop01
+resrouceGroupName=mfrg01
 deploymentName=vmdepl
 
 az group deployment create -g $resrouceGroupName \
     -n $deploymentName \
     --template-file azuredep.twonics.json \
     --parameters @azuredep.params.json
+
+#delete template
+az group deployment create -g $resrouceGroupName \
+    -n deletetemplate \
+    --template-file deletetemplate.json --mode Complete

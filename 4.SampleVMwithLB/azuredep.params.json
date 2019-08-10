@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "storageAccountName": {
-        "value": "mfsa123"
+        "value": "mfsa1234"
       },
       "adminUsername": {
         "value": "admin123"
@@ -12,7 +12,7 @@
         "value": "test123!@#"
       },
       "dnsNameforLBIP": {
-        "value": "mfsa123"
+        "value": "mfsa1234"
       }
     }
   }

@@ -103,7 +103,8 @@
       "lbID": "[resourceId('Microsoft.Network/loadBalancers',parameters('lbName'))]",
       "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
       "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
-      "lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]"
+      "lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
+      "customDataLink":"https://github.com/mifurm/ARMWorkshop/blob/master/samplecloudinit"
     },
     "resources": [
       {
@@ -304,7 +305,8 @@
           "osProfile": {
             "computerName": "[concat(parameters('vmNamePrefix'), copyIndex())]",
             "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[parameters('adminPassword')]"
+            "adminPassword": "[parameters('adminPassword')]",
+            "customData": "[base64(variables('customDataLink'))]"
           },
           "storageProfile": {
             "imageReference": {
