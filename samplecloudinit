@@ -1,5 +1,10 @@
+#cloud-config
+apt_update: true
 packages:
-  - httpd
-  - php
-  - postgresql
-  - postgresql-server
+  - apache2
+  - php-mysql
+  - mysql-server
+  - libapache2-mod-php7.0
+  - php7.0-mcrypt
+  - php7.0-gd
+  - php7.0-curl
