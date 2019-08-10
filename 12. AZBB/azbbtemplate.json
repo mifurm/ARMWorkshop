@@ -11,7 +11,7 @@
                 "vmCount": 1,
                 "osType": "windows",
                 "namePrefix": "test",
-                "adminPassword": "testPassw0rd!23",
+                "adminPassword": "<password>",
                 "nics": [{"subnetName": "web"}],
                 "virtualNetwork": {"name": "ra-vnet"}
             }
