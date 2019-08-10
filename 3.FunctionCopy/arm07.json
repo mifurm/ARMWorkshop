@@ -1,0 +1,94 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetname1": {
+            "defaultValue": "dev-vnet0",
+            "type": "String"
+        },
+        "vnetname2": {
+            "defaultValue": "dev2-vnet0",
+            "type": "String"
+        },
+        "vnetname3": {
+            "defaultValue": "dev3-vnet0",
+            "type": "String"
+        },
+        "addressPrefix1": {
+            "defaultValue": "10.1.0.0/16",
+            "type": "String"
+        },
+        "addressPrefix2": {
+            "defaultValue": "10.2.0.0/16",
+            "type": "String"
+        },
+        "addressPrefix3": {
+            "defaultValue": "10.3.0.0/16",
+            "type": "String"
+        },
+        "subnetPrefixes": {
+            "defaultValue": [
+                "10.1.0.0/24",
+                "10.1.1.0/24",
+                "10.1.2.0/24",
+                "10.1.3.0/24",
+                "10.1.4.0/24",
+                "10.1.5.0/24",
+                "10.1.6.0/24",
+                "10.1.7.0/24",
+                "10.1.8.0/24",
+                "10.1.9.0/24",
+                "10.1.10.0/24"
+            ],
+            "type": "Array"
+        },
+        "subnetPrefixes2": {
+            "defaultValue": [
+                "10.2.0.0/24",
+                "10.2.1.0/24",
+                "10.2.2.0/24",
+                "10.2.3.0/24",
+                "10.2.4.0/24",
+                "10.2.5.0/24",
+                "10.2.6.0/24",
+                "10.2.7.0/24",
+                "10.2.8.0/24",
+                "10.2.9.0/24",
+                "10.2.10.0/24"
+            ],
+            "type": "Array"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2018-04-01",
+            "name": "[concat(parameters('vnetname1'), copyIndex('vnetloop'))]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefix1')]"
+                    ]
+                },
+                "copy": [
+                    {
+                        "name": "subnets",
+                        "count": "[length(parameters('subnetPrefixes'))]",
+                        "input": {
+                            "name": "[concat('subnet', copyIndex('subnets'))]",
+                            "properties": {
+                                "addressPrefix": "[parameters('subnetPrefixes')[copyIndex('subnets')]]"
+                            }
+                        }
+                    }
+                ]
+            },
+            "copy": {
+                "name": "vnetloop",
+                "count": 10
+            }
+        }
+    ]
+}

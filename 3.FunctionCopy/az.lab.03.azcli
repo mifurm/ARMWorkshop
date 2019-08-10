@@ -1,0 +1,24 @@
+
+az account set --subscription "Visual Studio Enterprise – MPN"
+
+groupName=armworkshop
+az group create --name armworkshop --location northeurope
+
+#copy storage accounts
+az group deployment create --name armworkshop03dep \
+    -g $groupName \
+    --template-file '/Users/mifurm/Documents/Projekty/6.Klienci/Intercars/WorkshopARM/1.Functions/arm03.json'
+
+groupName1=armworkshop01
+az group deployment create --name armworkshop03dep \
+    -g $groupName1 \
+    --template-file '/Users/mifurm/Documents/Projekty/6.Klienci/Intercars/WorkshopARM/1.Functions/arm03.json'
+
+groupName1=armworkshop01
+az group deployment validate \
+    -g $groupName1 \
+    --template-file '/Users/mifurm/Documents/Projekty/6.Klienci/Intercars/WorkshopARM/1.Functions/arm03.json'
+
+az group deployment create --name armworkshop05dep \
+    -g $groupName1 \
+    --template-file '/Users/mifurm/Documents/Projekty/6.Klienci/Intercars/WorkshopARM/1.Functions/arm03.json'

@@ -1,0 +1,97 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetname1":{
+            "type": "string",
+            "defaultValue": "dev-vnet0"
+        },
+        "vnetname2":{
+            "type": "string",
+            "defaultValue": "dev2-vnet0"
+        },
+        "vnetname3":{
+            "type": "string",
+            "defaultValue": "dev3-vnet0"
+        },
+        "addressPrefix1":{
+            "type": "string",
+            "defaultValue": "10.1.0.0/16"
+        },
+        "addressPrefix2":{
+            "type": "string",
+            "defaultValue": "10.2.0.0/16"
+        },
+        "addressPrefix3":{
+            "type": "string",
+            "defaultValue": "10.3.0.0/16"
+        },
+        "subnetPrefixes":{
+            "type": "array",
+            "defaultValue": [
+                "10.1.0.0/24",
+                "10.1.1.0/24",
+                "10.1.2.0/24",
+                "10.1.3.0/24",
+                "10.1.4.0/24",
+                "10.1.5.0/24",
+                "10.1.6.0/24",
+                "10.1.7.0/24",
+                "10.1.8.0/24",
+                "10.1.9.0/24",
+                "10.1.10.0/24"
+            ]
+        },
+        "subnetPrefixes2":
+        {
+            "type": "array",
+            "defaultValue": [
+                "10.2.0.0/24",
+                "10.2.1.0/24",
+                "10.2.2.0/24",
+                "10.2.3.0/24",
+                "10.2.4.0/24",
+                "10.2.5.0/24",
+                "10.2.6.0/24",
+                "10.2.7.0/24",
+                "10.2.8.0/24",
+                "10.2.9.0/24",
+                "10.2.10.0/24"       
+            ]
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2018-04-01",
+            "location":"[resourceGroup().location]",
+            "name":"[concat(parameters('vnetname2'),copyIndex('vnet2copyFunc'))]",
+            "copy": {
+                "name": "vnet2copyFunc",
+                "count":10
+            },
+            "properties":{
+                "addressSpace":{
+                    "addressPrefixes":[
+                        "[parameters('addressPrefix2')]"
+                    ]
+                },
+                "subnets":[
+                    {
+                        "name": "vnet02subnet01",
+                        "properties":{
+                            "addressPrefix": "[parameters('subnetPrefixes2')[0]]"
+                        }
+                    },
+                    {
+                        "name": "vnet02subnet02",
+                        "properties":{
+                            "addressPrefix": "[parameters('subnetPrefixes2')[1]]"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
