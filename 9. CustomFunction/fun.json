@@ -1,4 +1,22 @@
-"functions": [
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "prefix":{
+            "type": "string",
+            "defaultValue": "mifurm"
+        },
+        "vmType":{
+            "type": "string",
+            "defaultValue": "Standard_DS1_v2"
+        },
+        "id":{
+            "type": "string",
+            "defaultValue": "1"
+        }
+    },
+    "variables": {},
+    "functions": [
     {
         "namespace": "nicNameCount",
         "members": {
@@ -23,5 +41,13 @@
                 }
             }
         }
+    }],
+    "resources": [],
+    "outputs": {
+        "outputvalue":{
+            "type": "string",
+            "value": "[nicNameCount.getNicName(parameters('prefix'),parameters('vmType'),parameters('id'))]"
+        }
     }
-],
+}
+
