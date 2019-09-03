@@ -16,5 +16,4 @@ $newpolicy  = New-AzIpsecPolicy `
   -IpsecEncryption AES256 -IpsecIntegrity SHA256 -PfsGroup PFS2048
 
 Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connection `
--IpsecPolicies $newpolicy 
-#add IPSecSelector
+-IpsecPolicies $newpolicy -UsePolicyBasedTrafficSelectors $True
