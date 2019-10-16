@@ -1,6 +1,7 @@
 #choose port to listen to
 #vm01 - 137.117.195.227, 10.0.0.4
 #vm02 - 40.115.0.60, 10.0.0.5
+#http://jensd.be/343/linux/forward-a-tcp-port-to-another-ip-or-port-using-nat-with-iptables
 
 
 sudo sysctl net.ipv4.ip_forward
