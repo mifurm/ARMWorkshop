@@ -283,7 +283,7 @@
         "vmName2": "vmwin2k16dev01",
         "vmName3": "vmwin2k8r2dev01",
         "jumphostvmname":"kali01mng01",
-        "vmSizeLinux": "Standard_A0",
+        "vmSizeLinux": "Standard_DS1_v2",
         "vmSizeWindows": "Standard_DS1_v2"
     },
     "resources": [
