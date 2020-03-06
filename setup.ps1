@@ -1,3 +1,5 @@
+#Set-AzContext -Subscription "Microsoft Azure Sponsorship"
+#Connect-AzureAD
 $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
 $PasswordProfile.Password = "Testtest123!@#"
 $counter=1
