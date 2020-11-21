@@ -1,1 +1,5 @@
+#bash
 az role definition create --role-definition vm-operator.json
+
+#psh
+New-AzureRmRoleDefinition -InputFile ./vmoperator.ps1
