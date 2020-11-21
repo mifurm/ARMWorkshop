@@ -1,5 +1,6 @@
 {
-    "Name": "Virtual Machine Operator",
+    "Name": "VirtualMachineOperator",
+    "Description": "Custom Role Definition",
     "IsCustom": true,
     "Actions": [
       "Microsoft.Compute/virtualMachines/start/action",
@@ -10,6 +11,6 @@
     ],
     "NotActions": [],
     "AssignableScopes": [
-      "/subscriptions/<sub_id>"
+      "/subscriptions/<subs id>/resourceGroups/<rg name>"
     ]
 }
