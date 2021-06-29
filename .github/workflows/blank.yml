@@ -2,21 +2,15 @@
   uses: Azure/login@v1
   with:
     # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
-    creds: 
-    # Set this value to true to enable Azure PowerShell Login in addition to Az CLI login
-    enable-AzPSSession: # optional
-    # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
-    environment: # optional, default is azurecloud
-    # Set this value to true to enable support for accessing tenants without subscriptions
-    allow-no-subscriptions: # optional
+    creds: ${{ secrets.AZURE_CREDENTIALS }}
 - name: Deploy Azure Resource Manager (ARM) Template
   uses: Azure/arm-deploy@v1
   with:
     # Provide the scope of the deployment. Valid values are: 'resourcegroup', 'managementgroup', 'subscription'
     scope: 'resourcegroup'
     # Override the Subscription Id set by Azure Login.
-    resourceGroupName: # optional
+    resourceGroupName: 'mf-ghactions-demo'
     # Specify the path or URL to the Azure Resource Manager template.
-    template: 
+    template: 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/100-blank-template/azuredeploy.json'
     # Incremental (only add resources to resource group) or Complete (remove extra resources from resource group) or Validate (only validates the template).
    
