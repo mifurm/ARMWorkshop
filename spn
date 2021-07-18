@@ -9,3 +9,5 @@ Set-AzureADServicePrincipal -ObjectId $servicePrincipal.ObjectId -AccountEnabled
 
 $Credential = Get-Credential
 Connect-AzAccount -Credential $Credential -Tenant '16dd9b56-84a8-4b26-b800-741b14debe2f' -ServicePrincipal
+
+#https://stefanstranger.github.io/2018/11/18/UsingWindowsGraphAPI/
