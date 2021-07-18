@@ -1,0 +1,11 @@
+$appId = "051a8bc7-5b82-4852-9262-3f92dac6b435"
+$servicePrincipal = Get-AzureADServicePrincipal -Filter "appId eq '$appId'"
+
+$displayName = "app01"
+$servicePrincipal = Get-AzureADServicePrincipal -Filter "DisplayName eq '$displayName'"
+
+#disable the service to log-in
+Set-AzureADServicePrincipal -ObjectId $servicePrincipal.ObjectId -AccountEnabled $false
+
+$Credential = Get-Credential
+Connect-AzAccount -Credential $Credential -Tenant '16dd9b56-84a8-4b26-b800-741b14debe2f' -ServicePrincipal
