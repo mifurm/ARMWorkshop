@@ -11,4 +11,5 @@ for (;$counter -le $maxUsers; $counter++)
 #
 #
 # az group list --query "[?starts_with(name, 'stk8srg')].[name]" --output tsv | xargs -n 1 bash -c 'az group delete -n $0 --yes --no-wait'
+# az group list --query "[*].[name]" --output tsv | xargs -n 1 bash -c 'az group delete -n $0 --yes --no-wait'
 #
