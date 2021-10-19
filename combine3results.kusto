@@ -1,0 +1,29 @@
+let startservice=endofweek(now())-6h;
+let stopservice=startofweek(now())-6h+8d;
+let timeGrain=1m;
+let nrofevents1 = toscalar(
+requests
+| where timestamp > ago(5m)
+| where (timestamp < startservice) or ( timestamp > stopservice)
+| where client_Type != "Browser"
+| extend urlPath = tostring(parseurl(url)['Path'])
+| where not (urlPath in ("/<TODO>"))
+| summarize avg(duration) by bin(timestamp, timeGrain)
+| where avg_duration > 800
+| summarize count());
+let nrofevents2=toscalar(
+exceptions
+| where timestamp > ago(5m)
+| where (timestamp < startservice) or ( timestamp > stopservice)
+| where client_Type != "Browser"
+| where type contains "<TODO>"
+| summarize sum(itemCount));
+let nrofevents3= toscalar(
+requests
+| where timestamp > ago(5m)
+| where (timestamp < startservice) or ( timestamp > stopservice)
+| extend urlPath = tostring(parseurl(url)['<TODO>'])
+| where urlPath in ("<TODO>")
+| where resultCode == 200
+| summarize count());
+print iif(nrofevents3 > 0, nrofevents1 + nrofevents2 ,nrofevents1 + nrofevents2 + 1)
