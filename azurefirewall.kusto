@@ -1,0 +1,20 @@
+# Azure Firewall Log Analysis
+
+AzureDiagnostics
+| where ResourceType == "AZUREFIREWALLS"
+| extend
+     proto =      extract(@"^([A-Z]+) ",1,msg_s)
+    ,src_host =   extract(@"request from ([\d\.]*)",1,msg_s)
+    ,src_port =   extract(@"request from [\d\.]*:(\d+)",1,msg_s)
+    ,dest_host =  extract(@" to ([-\w\.]+)(:|\. |\.$)",1,msg_s)
+    ,dest_port =  extract(@" to [-\w\.]+:(\d+)",1,msg_s)
+    ,action =     iif(
+       msg_s has "was denied"
+      ,"Deny"
+      ,extract(@" Action: (\w+)",1,msg_s))
+    ,rule_coll =  extract(@" Rule Collection: (\w+)",1,msg_s)
+    ,rule =       coalesce(
+       extract(@" Rule: (.*)",1,msg_s)
+      ,extract("No rule matched",0,msg_s))
+    ,reason =     extract(@" Reason: (.*)",1,msg_s)
+| project TimeGenerated,Category,proto,src_host,src_port,dest_host,dest_port,action,rule_coll,rule,reason,msg_s
